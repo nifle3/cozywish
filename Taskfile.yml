@@ -1,0 +1,23 @@
+version: '3'
+
+vars:
+  OUTPUT_FILE: dist/web
+
+env:
+  CGO_ENABLED: 0
+
+dotenv: ['.env', '{{.ENV}}/.env', '{{.HOME}}/.env']
+
+tasks:
+  build:
+    cmds:
+      - go build -o {{.OUTPUT_FILE}} ./cmd/web/main.go
+    sourcres:
+      - "**/*.go"
+    generates:
+      - "{{.OUTPUT_FILE}}"
+
+  run:
+    deps: [build]
+    cmds:
+      - "./{{.OUTPUT_FILE}}"

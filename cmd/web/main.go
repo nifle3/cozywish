@@ -13,13 +13,26 @@ import (
 //go:embed static/*
 var static embed.FS
 
+func main() {
+	exitCode, err := run()
+	if err != nil {
+		slog.Error(err.Error())
+		os.Exit(exitCode)
+	}
+
+	slog.Warn("Application shutdown success")
+}
+
 func run() (int, error) {
-	_, err := config.FromEnv()
+	slog.Info("App start with default log. Start reading cfg")
+	cfg, err := config.FromEnv()
 	if err != nil {
 		return 78, err
 	}
+	slog.Info("Read config complete")
 
-	// TODO: logger setup
+	loggerSetup(cfg.LoggerLevel)
+
 	// TODO: gracegul shutdown setup
 	// TODO: db setup
 	// TODO: routes setup
@@ -37,12 +50,6 @@ func run() (int, error) {
 	return 0, err
 }
 
-func main() {
-	exitCode, err := run()
-	if err != nil {
-		slog.Error(err.Error())
-		os.Exit(exitCode)
-	}
+func loggerSetup(level string) {
 
-	slog.Warn("Application shutdown success")
 }
