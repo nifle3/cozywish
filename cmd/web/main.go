@@ -14,11 +14,15 @@ import (
 var static embed.FS
 
 func run() (int, error) {
-	config.FromEnv()
-	// logger setup
-	// gracegul shutdown setup
-	// db setup
-	// routes setup
+	_, err := config.FromEnv()
+	if err != nil {
+		return 78, err
+	}
+
+	// TODO: logger setup
+	// TODO: gracegul shutdown setup
+	// TODO: db setup
+	// TODO: routes setup
 
 	fsys, err := fs.Sub(static, "static")
 	if err != nil {
