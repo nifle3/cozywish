@@ -3,6 +3,8 @@ package config
 import "github.com/ilyakaznacheev/cleanenv"
 
 type Config struct {
+	AppEnv string `env:"APP_ENV" env-default:"development"`
+
 	ServerPort int    `env:"SERVER_PORT" env-default:"8080"`
 	ServerHost string `env:"SERVER_HOST" env-default:""`
 
