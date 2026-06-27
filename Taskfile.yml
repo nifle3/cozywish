@@ -12,8 +12,10 @@ tasks:
   build:
     cmds:
       - go build -o {{.OUTPUT_FILE}} ./cmd/web/main.go
-    sourcres:
+    sources:
       - "**/*.go"
+      - "**/*.css"
+      - "**/*.html"
     generates:
       - "{{.OUTPUT_FILE}}"
 
@@ -21,3 +23,13 @@ tasks:
     deps: [build]
     cmds:
       - "./{{.OUTPUT_FILE}}"
+  
+  dev:
+    deps: [build]
+    cmds:
+      - "./{{.OUTPUT_FILE}}"
+    watch: true 
+    sources:
+      - "**/*.go"
+      - "**/*.css"
+      - "**/*.html"

@@ -5,12 +5,14 @@
 
 <head>
     <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/static/doodle.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body class="doodle">
-    {{ template "content" . }}
-
+    <main>
+        {{ q "content" . }}
+    </main>
     <footer>
 
     </footer>
