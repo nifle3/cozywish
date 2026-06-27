@@ -9,18 +9,26 @@ env:
 dotenv: ['.env', '{{.ENV}}/.env', '{{.HOME}}/.env']
 
 tasks:
-  build:
+  build-frontend:
+    cmds:
+      - pnpm build
+    sources:
+      - "**/*.html"
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.css"
+
+  build-web:
+    deps: [build-frontend]
     cmds:
       - go build -o {{.OUTPUT_FILE}} ./cmd/web/main.go
     sources:
       - "**/*.go"
-      - "**/*.css"
-      - "**/*.html"
     generates:
       - "{{.OUTPUT_FILE}}"
 
   run:
-    deps: [build]
+    deps: [build-web]
     cmds:
       - "./{{.OUTPUT_FILE}}"
   
